@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm2yqpv5b7ts6"]
+
+[ext_resource type="PackedScene" uid="uid://dpcrk3g4qe6je" path="res://Scenes/UI/user_interface.tscn" id="1_0qq4k"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("1_0qq4k")]

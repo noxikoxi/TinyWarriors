@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn8qka7jrwkpx"]
+
+[ext_resource type="Texture2D" uid="uid://qij4uum05ix0" path="res://Assets/UI/Buttons/Button_Blue.png" id="1_55opt"]
+[ext_resource type="Texture2D" uid="uid://ceijn8pfkrfin" path="res://Assets/UI/Units/Warrior_Blue.png" id="2_wcnog"]
+
+[node name="KnightButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 50.0
+offset_bottom = 50.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_55opt")
+expand_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.6
+anchor_bottom = 0.25
+offset_right = 78.0
+offset_bottom = 91.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_wcnog")
+expand_mode = 2

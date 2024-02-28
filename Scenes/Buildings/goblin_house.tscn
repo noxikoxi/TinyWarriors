@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl36h7gbva464"]
+
+[ext_resource type="Texture2D" uid="uid://dgunvfvukdf1n" path="res://Assets/Factions/Goblins/Buildings/Wood_House/Goblin_House.png" id="1_oe06j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kufyp"]
+radius = 65.0
+
+[node name="GoblinHouse" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kufyp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oe06j")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-1, 73)

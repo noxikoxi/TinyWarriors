@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://cy53ou0m3e5xr"]
+[gd_scene load_steps=35 format=3 uid="uid://cy53ou0m3e5xr"]
 
+[ext_resource type="Script" path="res://Scenes/Enemies'/goblin_torch.gd" id="1_l420g"]
 [ext_resource type="Texture2D" uid="uid://dkduhdw862r6l" path="res://Assets/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_uipek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_05rif"]
-radius = 37.0135
+radius = 26.1725
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5p7c0"]
 atlas = ExtResource("1_uipek")
@@ -243,13 +244,16 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="GoblinTorch" type="CharacterBody2D"]
+[node name="GoblinTorch" type="CharacterBody2D" groups=["Enemies"]]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_l420g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_05rif")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -11)
 sprite_frames = SubResource("SpriteFrames_h742y")
 animation = &"move"
 autoplay = "Idle"
-frame_progress = 0.00317049

@@ -29,8 +29,8 @@
 [ext_resource type="Texture2D" uid="uid://8r7pshyjxlvq" path="res://Assets/Deco/11.png" id="25_tdy2u"]
 [ext_resource type="PackedScene" uid="uid://bl36h7gbva464" path="res://Scenes/Buildings/goblin_house.tscn" id="27_5vh7h"]
 [ext_resource type="PackedScene" uid="uid://c2faffvjw3s05" path="res://Scenes/Buildings/gold_mine.tscn" id="28_o2st5"]
-[ext_resource type="PackedScene" uid="uid://vnn306icopyn" path="res://Scenes/Enemies'/goblin.tscn" id="30_8b1ss"]
-[ext_resource type="PackedScene" uid="uid://bw6vohyqylqwb" path="res://Scenes/Units/knight1.tscn" id="31_jk7l6"]
+[ext_resource type="PackedScene" uid="uid://cy53ou0m3e5xr" path="res://Scenes/Enemies'/goblin_torch.tscn" id="29_2nnjp"]
+[ext_resource type="PackedScene" uid="uid://cuic32pqu12e6" path="res://Scenes/Units/knight.tscn" id="29_4s5ny"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aryre"]
 texture = ExtResource("2_d2rtb")
@@ -497,14 +497,18 @@ position = Vector2(607, 188)
 [node name="Enemies" parent="." index="3"]
 metadata/_edit_lock_ = true
 
-[node name="Node2D" parent="Enemies" index="0" instance=ExtResource("30_8b1ss")]
-position = Vector2(1614, 520)
+[node name="GoblinTorch" parent="Enemies" index="0" instance=ExtResource("29_2nnjp")]
+z_index = 1
+position = Vector2(631, 777)
+scale = Vector2(-1, 1)
 
 [node name="Units" parent="." index="4"]
 position = Vector2(48, 18)
+metadata/_edit_lock_ = true
 
-[node name="Knight" parent="Units" index="0" instance=ExtResource("31_jk7l6")]
-position = Vector2(265, 314)
+[node name="Knight" parent="Units" index="0" instance=ExtResource("29_4s5ny")]
+z_index = 1
+position = Vector2(1730, 583)
 
 [node name="Camera2D" parent="." index="5"]
 position = Vector2(960, 548)
@@ -518,8 +522,6 @@ navigation_polygon = SubResource("NavigationPolygon_b2he8")
 metadata/_edit_lock_ = true
 
 [node name="LevelBarriers" type="Node2D" parent="." index="9"]
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelBarriers" index="0"]
 collision_layer = 4

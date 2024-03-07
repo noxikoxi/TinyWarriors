@@ -1,11 +1,8 @@
-[gd_scene load_steps=38 format=3 uid="uid://vnn306icopyn"]
+[gd_scene load_steps=37 format=3 uid="uid://vnn306icopyn"]
 
 [ext_resource type="PackedScene" uid="uid://cjmdtp4mv5wgy" path="res://Scenes/base_classes/navigable_entity.tscn" id="1_un7a5"]
 [ext_resource type="Script" path="res://Scenes/Enemies'/goblin.gd" id="2_4hpaa"]
 [ext_resource type="Texture2D" uid="uid://dkduhdw862r6l" path="res://Assets/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_xrgga"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_w2r2y"]
-radius = 376.005
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wy0qa"]
 radius = 56.0089
@@ -251,15 +248,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="GoblinTorch" groups=["Enemies"] instance=ExtResource("1_un7a5")]
+[node name="GoblinTorch" groups=["Goblins"] instance=ExtResource("1_un7a5")]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 15
 script = ExtResource("2_4hpaa")
 
-[node name="CollisionShape2D" parent="NoticeArea" index="0"]
-shape = SubResource("CircleShape2D_w2r2y")
+[node name="NavigationAgent2D" parent="." index="0"]
+path_postprocessing = 1
 
 [node name="AttackArea" type="Area2D" parent="." index="1"]
+collision_layer = 8
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
 shape = SubResource("CircleShape2D_wy0qa")
@@ -273,17 +272,11 @@ sprite_frames = SubResource("SpriteFrames_jmu6a")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="NavigationAgent2D" parent="." index="4"]
-path_postprocessing = 1
-
-[node name="Timers2" type="Node" parent="." index="5"]
-
 [node name="AttackTimer" type="Timer" parent="Timers" index="1"]
 wait_time = 1.7
 
-[connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[node name="Timers2" type="Node" parent="." index="5"]
+
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]

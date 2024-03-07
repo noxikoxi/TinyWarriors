@@ -5,37 +5,24 @@ func _ready():
 	speed = 150
 	damage = 10
 	health = 20
-	target_base = Globals.castle_position
-	$NavigationAgent2D.target_position = target_base
+	target_base = Globals.castle
+	enemy_group = "Units"
+	enemy_buildings_group = "Buildings"
+	enemy = target_base
 	$AnimatedSprite2D.play("move")
 	
 	
-func _on_notice_area_body_entered(body):
-	if can_change_enemy and body in get_tree().get_nodes_in_group("Units"):
-		enemy = body
-		can_change_enemy = false
-		see_enemy =  true
-		$NavigationAgent2D.target_position = body.global_position
+func _process(_delta):
+	if active:
+		if $AttackArea.overlaps_body(enemy):
+			active = false
+			enemy_in_attack_area = true
+			if can_attack:
+				attack()
+		else:
+			enemy_in_attack_area = false
+			active = true
 
-func _on_notice_area_body_exited(body):
-	if body in get_tree().get_nodes_in_group("Units"):
-		see_enemy = false
-		$NavigationAgent2D.target_position = target_base
-		$AnimatedSprite2D.play("move")
-
-
-func _on_attack_area_body_entered(body):
-	if body == enemy:
-		velocity = Vector2.ZERO
-		enemy_in_attack_area = true
-		attack()
-
-
-func _on_attack_area_body_exited(body):
-	if body == enemy:
-		enemy_in_attack_area = false
-		can_change_enemy = true
-		enemy = null
 		
 func attack():
 	var attack_dir: String
@@ -63,4 +50,11 @@ func _on_animated_sprite_2d_animation_finished():
 	if $AnimatedSprite2D.animation != "move": # Attack
 		$AnimatedSprite2D.play("idle")
 		if enemy_in_attack_area:
-			enemy.hit(damage)
+			var temp_enemy = enemy
+			if enemy.health - damage <= 0:
+				get_next_target(enemy)
+				enemy_in_attack_area = false
+				active = true
+				$AnimatedSprite2D.play("move")
+				
+			temp_enemy.hit(damage)

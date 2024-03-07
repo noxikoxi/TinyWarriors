@@ -1,11 +1,8 @@
-[gd_scene load_steps=54 format=3 uid="uid://bw6vohyqylqwb"]
+[gd_scene load_steps=53 format=3 uid="uid://bw6vohyqylqwb"]
 
 [ext_resource type="PackedScene" uid="uid://cjmdtp4mv5wgy" path="res://Scenes/base_classes/navigable_entity.tscn" id="1_hc1ri"]
 [ext_resource type="Texture2D" uid="uid://bkyv43yst1mn7" path="res://Assets/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_qyj24"]
 [ext_resource type="Script" path="res://Scenes/Units/knight1.gd" id="2_td7e1"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2npyp"]
-radius = 379.111
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8jnwd"]
 radius = 66.0076
@@ -379,22 +376,19 @@ animations = [{
 }]
 
 [node name="Knight" groups=["Units"] instance=ExtResource("1_hc1ri")]
-collision_mask = 14
+collision_mask = 15
 script = ExtResource("2_td7e1")
 
-[node name="NoticeArea" parent="." index="0"]
-collision_layer = 8
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="NoticeArea" index="0"]
-shape = SubResource("CircleShape2D_2npyp")
-
-[node name="NavigationAgent2D" parent="." index="1"]
+[node name="NavigationAgent2D" parent="." index="0"]
 debug_enabled = true
+
+[node name="AttackCooldown" type="Timer" parent="Timers" index="1"]
+wait_time = 1.5
+one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="." index="2"]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
 shape = SubResource("CircleShape2D_8jnwd")
@@ -408,14 +402,5 @@ sprite_frames = SubResource("SpriteFrames_ong15")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Timers2" type="Node" parent="." index="5"]
-
-[node name="AttackCooldown" type="Timer" parent="Timers" index="1"]
-wait_time = 1.5
-one_shot = true
-
-[connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timers/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

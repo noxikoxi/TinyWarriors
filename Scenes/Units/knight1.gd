@@ -2,27 +2,26 @@ extends NavigableEntity
 
 func _ready():
 	super._ready()
-	speed = 300
+	speed = 180
 	damage = 10
 	health = 30
-	target_base = Globals.goblin_house_position
-	$NavigationAgent2D.target_position = target_base
+	target_base = Globals.goblin_house
+	enemy = target_base
+	enemy_group = "Goblins"
+	enemy_buildings_group = "GoblinBuildings"
 	$AnimatedSprite2D.play("move")
 	
-
-func _on_attack_area_body_entered(body):
-	if body == enemy:
-		velocity = Vector2.ZERO
-		enemy_in_attack_area = true
-		attack()
-
-
-func _on_attack_area_body_exited(body):
-	if body == enemy:
-		enemy_in_attack_area = false
-		can_change_enemy = true
-		enemy = null
-		
+func _process(_delta):
+	if active:
+		if $AttackArea.overlaps_body(enemy):
+			active = false
+			enemy_in_attack_area = true
+			if can_attack:
+				attack()
+		else:
+			enemy_in_attack_area = false
+			active = true
+			$AnimatedSprite2D.play("move")
 		
 func attack():
 	var attack_num:int = randi_range(1, 2)
@@ -40,25 +39,9 @@ func attack():
 	$AnimatedSprite2D.play("attack_" + attack_dir + "_" + str(attack_num))
 	$Timers/AttackCooldown.start()
 
-
-func _on_notice_area_body_entered(body):
-	if can_change_enemy and body in get_tree().get_nodes_in_group("Enemies"):
-		enemy = body
-		can_change_enemy = false
-		see_enemy = true
-		$NavigationAgent2D.target_position = body.global_position
-
-
-func _on_notice_area_body_exited(body):
-	if  body in get_tree().get_nodes_in_group("Enemies"):
-		see_enemy = false
-		$NavigationAgent2D.target_position = target_base
-		$AnimatedSprite2D.play("move")
-
-
 func _on_attack_cooldown_timeout():
 	can_attack = true
-	if enemy_in_attack_area:
+	if enemy and enemy_in_attack_area:
 		attack()
 
 
@@ -66,4 +49,11 @@ func _on_animated_sprite_2d_animation_finished():
 	if $AnimatedSprite2D.animation != "move": # Attack
 		$AnimatedSprite2D.play("idle")
 		if enemy_in_attack_area:
-			enemy.hit(damage)
+			var temp_enemy = enemy
+			if enemy.health - damage <= 0:
+				get_next_target(enemy)
+				enemy_in_attack_area = false
+				active = true
+				
+			temp_enemy.hit(damage)
+			

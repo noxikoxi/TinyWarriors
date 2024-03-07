@@ -1,21 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://dphiclbc2e80i"]
+[gd_scene load_steps=4 format=3 uid="uid://dphiclbc2e80i"]
 
 [ext_resource type="Texture2D" uid="uid://cennh1q1lc23a" path="res://Assets/Factions/Knights/Buildings/Castle/Castle_Blue.png" id="1_ccdxm"]
 [ext_resource type="Script" path="res://Scenes/Buildings/castle.gd" id="1_fdhna"]
 
-[node name="Castle" type="StaticBody2D"]
-collision_layer = 4
-collision_mask = 3
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwn18"]
+size = Vector2(288, 166)
+
+[node name="Castle" type="StaticBody2D" groups=["Buildings"]]
+collision_layer = 16
+collision_mask = 11
 script = ExtResource("1_fdhna")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-132, 85, -119, 97, -89, 106, -82, 111, -39, 113, 24, 112, 54, 113, 78, 111, 131, 88, 134, 50, 128, 37, 127, 5, 140, -9, 144, -49, 137, -63, 131, -56, 126, -60, 126, -71, 104, -77, 103, -67, 95, -69, 94, -75, 80, -74, 68, -84, 56, -83, 58, -71, 39, -71, 37, -83, 12, -84, 13, -72, -12, -71, -13, -83, -38, -82, -40, -71, -55, -72, -57, -83, -70, -82, -79, -74, -92, -75, -96, -68, -102, -67, -103, -77, -126, -72, -126, -59, -130, -58, -137, -63, -146, -49, -142, -16, -134, 1, -126, 7, -128, 41, -133, 49)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -86)
+shape = SubResource("RectangleShape2D_wwn18")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -87)
 texture = ExtResource("1_ccdxm")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(0, 124)
-
-[node name="DoorPosition" type="Marker2D" parent="."]
-position = Vector2(-1, 89)
+position = Vector2(1, 53)

@@ -1,11 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2faffvjw3s05"]
+[gd_scene load_steps=5 format=3 uid="uid://c2faffvjw3s05"]
 
+[ext_resource type="Script" path="res://Scenes/Buildings/gold_mine.gd" id="1_7fh8h"]
 [ext_resource type="Texture2D" uid="uid://cs1mp20j52odu" path="res://Assets/Resources/Gold Mine/GoldMine_Inactive.png" id="1_a6pb4"]
+[ext_resource type="Texture2D" uid="uid://c8uabhcv10ko0" path="res://Assets/Resources/Gold Mine/GoldMine_Active.png" id="3_4mgmk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srser"]
+radius = 53.0
+height = 156.0
 
 [node name="GoldMine" type="StaticBody2D"]
+collision_layer = 64
+script = ExtResource("1_7fh8h")
+
+[node name="PawnArea" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PawnArea"]
+position = Vector2(0, -21)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_srser")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -25)
 polygon = PackedVector2Array(-77, 27, -51, 36, -21, 41, 19, 40, 80, 28, 69, -18, 35, -50, 0, -59, -33, -53, -59, -34, -73, -4)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -25)
 texture = ExtResource("1_a6pb4")
+metadata/_edit_lock_ = true
+
+[node name="ActiveSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -25)
+texture = ExtResource("3_4mgmk")
+metadata/_edit_lock_ = true
+
+[node name="DoorPosition" type="Marker2D" parent="."]
+position = Vector2(0, 27)
+
+[node name="GoldSpawn" type="Marker2D" parent="."]
+position = Vector2(-1, -57)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="GoldTimer" type="Timer" parent="Timers"]
+wait_time = 3.0
+
+[connection signal="body_entered" from="PawnArea" to="." method="_on_pawn_area_body_entered"]
+[connection signal="timeout" from="Timers/GoldTimer" to="." method="_on_gold_timer_timeout"]

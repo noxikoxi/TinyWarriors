@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpcrk3g4qe6je"]
+[gd_scene load_steps=9 format=3 uid="uid://dpcrk3g4qe6je"]
 
 [ext_resource type="Script" path="res://Scenes/UI/user_interface.gd" id="1_63wgx"]
 [ext_resource type="Texture2D" uid="uid://bp6fcwx8winjy" path="res://Assets/UI/Ribbons/Ribbon_Blue_3Slides.png" id="2_a1u0m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://qij4uum05ix0" path="res://Assets/UI/Buttons/Button_Blue.png" id="4_0n8eq"]
 [ext_resource type="Texture2D" uid="uid://cq5b4iqs381m" path="res://Assets/UI/Buttons/Button_Blue_Pressed.png" id="5_2qu2w"]
 [ext_resource type="Texture2D" uid="uid://ceijn8pfkrfin" path="res://Assets/UI/Units/Warrior_Blue.png" id="6_mam0l"]
+[ext_resource type="Texture2D" uid="uid://d1d1spg10if2l" path="res://Assets/UI/Units/Pawn_Blue.png" id="7_83u41"]
 
 [sub_resource type="Theme" id="Theme_xv8a4"]
 default_base_scale = 1.0
@@ -14,52 +15,48 @@ default_font_size = 35
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_63wgx")
 
-[node name="Banner" type="Control" parent="."]
+[node name="BannerGold" type="Control" parent="."]
 layout_mode = 3
-anchor_left = 0.03
+anchor_left = 0.05
 anchor_top = 0.91
-anchor_right = 0.25
-anchor_bottom = 0.98
-offset_bottom = 0.200073
+anchor_right = 0.2
+anchor_bottom = 0.94
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="BannerGold"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="Banner"]
-layout_mode = 1
-offset_right = 200.0
-offset_bottom = 60.0
-scale = Vector2(2, 1.5)
 texture = ExtResource("2_a1u0m")
-expand_mode = 2
+expand_mode = 3
 
-[node name="GoldCounter" type="Control" parent="Banner"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BannerGold/TextureRect"]
 layout_mode = 1
-anchor_left = 0.3
-anchor_top = 0.2
-anchor_right = 0.7
-anchor_bottom = 0.7
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.5
+offset_right = 60.5
+offset_bottom = 49.0
 grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Banner/GoldCounter"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Banner/GoldCounter/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="BannerGold/TextureRect/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_i3r0e")
 expand_mode = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Banner/GoldCounter/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BannerGold/TextureRect/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 
-[node name="Label" type="Label" parent="Banner/GoldCounter/HBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="BannerGold/TextureRect/HBoxContainer/MarginContainer"]
 modulate = Color(1, 0.827451, 0.129412, 1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -68,7 +65,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GridContainer" type="AspectRatioContainer" parent="."]
+[node name="AspectRatio" type="AspectRatioContainer" parent="."]
 anchors_preset = -1
 anchor_left = 0.25
 anchor_top = 0.92
@@ -77,14 +74,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="KnightButton" type="TextureButton" parent="GridContainer"]
+[node name="KnightButton" type="TextureButton" parent="AspectRatio"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("4_0n8eq")
 texture_pressed = ExtResource("5_2qu2w")
 stretch_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="GridContainer/KnightButton"]
+[node name="TextureRect" type="TextureRect" parent="AspectRatio/KnightButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.7
@@ -99,3 +96,38 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_mam0l")
 expand_mode = 2
+
+[node name="AspectRatio2" type="AspectRatioContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.92
+anchor_right = 0.35
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PawnButton" type="TextureButton" parent="AspectRatio2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("4_0n8eq")
+texture_pressed = ExtResource("5_2qu2w")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="AspectRatio2/PawnButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.6
+anchor_right = 0.7
+anchor_bottom = 0.6
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_83u41")
+expand_mode = 2
+
+[connection signal="pressed" from="AspectRatio/KnightButton" to="." method="_on_knight_button_pressed"]
+[connection signal="pressed" from="AspectRatio2/PawnButton" to="." method="_on_pawn_button_pressed"]

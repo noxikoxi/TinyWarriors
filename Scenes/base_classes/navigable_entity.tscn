@@ -5,10 +5,6 @@
 [node name="Agent" type="CharacterBody2D"]
 script = ExtResource("1_dvbe3")
 
-[node name="NoticeArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea"]
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Timers" type="Node" parent="."]
@@ -17,5 +13,9 @@ script = ExtResource("1_dvbe3")
 wait_time = 0.2
 autostart = true
 
-[connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
+[node name="ChangeTarget" type="Timer" parent="Timers"]
+wait_time = 0.5
+autostart = true
+
 [connection signal="timeout" from="Timers/NavigationTimer" to="." method="_on_navigation_timer_timeout"]
+[connection signal="timeout" from="Timers/ChangeTarget" to="." method="_on_change_target_timeout"]

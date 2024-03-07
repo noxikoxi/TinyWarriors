@@ -1,5 +1,14 @@
 extends Node
 
-var gold:int = 200
-var goblin_house_position:Vector2
-var castle_position:Vector2
+signal gold_change
+
+var gold:int = 200:
+	get:
+		return gold
+	set(value):
+		gold = value
+		gold_change.emit()
+		
+var goblin_house:StaticBody2D
+var castle: StaticBody2D
+var gold_mine: StaticBody2D

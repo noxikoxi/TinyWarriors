@@ -489,7 +489,7 @@ position = Vector2(256, 211)
 position = Vector2(1616, 209)
 
 [node name="GoldMine" parent="Buildings" index="2" instance=ExtResource("28_o2st5")]
-position = Vector2(605, 218)
+position = Vector2(607, 188)
 
 [node name="Enemies" parent="." index="3"]
 metadata/_edit_lock_ = true
@@ -550,7 +550,7 @@ shape = SubResource("RectangleShape2D_w0ql1")
 [node name="Timers" type="Node" parent="." index="10"]
 
 [node name="GoblinSpawn" type="Timer" parent="Timers" index="0"]
-wait_time = 2.0
+wait_time = 10.0
 
 [node name="GoldTimer" type="Timer" parent="Timers" index="1"]
 autostart = true

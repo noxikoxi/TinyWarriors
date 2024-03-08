@@ -1,8 +1,8 @@
 extends Node2D
 
-var knight_scene: PackedScene = preload("res://Scenes/Units/knight1.tscn")
-var pawn_scene: PackedScene = preload("res://Scenes/Units/pawn1.tscn")
-var goblin_scene: PackedScene = preload("res://Scenes/Enemies'/goblin.tscn")
+var knight_scene: PackedScene = preload("res://Scenes/Units/knight.tscn")
+var pawn_scene: PackedScene = preload("res://Scenes/Units/pawn.tscn")
+var goblin_scene: PackedScene = preload("res://Scenes/Enemies/goblin.tscn")
 
 func create_knight():
 	var knight = knight_scene.instantiate() as CharacterBody2D

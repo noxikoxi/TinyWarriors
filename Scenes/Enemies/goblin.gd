@@ -22,6 +22,7 @@ func _process(_delta):
 		else:
 			enemy_in_attack_area = false
 			active = true
+			$AnimatedSprite2D.play("move")
 
 		
 func attack():
@@ -54,7 +55,10 @@ func _on_animated_sprite_2d_animation_finished():
 			if enemy.health - damage <= 0:
 				get_next_target(enemy)
 				enemy_in_attack_area = false
-				active = true
-				$AnimatedSprite2D.play("move")
+				if enemy == target_base:
+					active = false
+					enemy = null
+				else:
+					active = true
 				
 			temp_enemy.hit(damage)

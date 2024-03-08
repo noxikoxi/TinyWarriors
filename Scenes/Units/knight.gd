@@ -51,13 +51,14 @@ func _on_animated_sprite_2d_animation_finished():
 		if enemy_in_attack_area:
 			var temp_enemy = enemy
 			if enemy.health - damage <= 0:
-				get_next_target(enemy)
 				enemy_in_attack_area = false
 				if enemy == target_base:
 					active = false
 					enemy = null
 				else:
 					active = true
+					get_next_target(enemy)
+					
 				
 			temp_enemy.hit(damage)
 			

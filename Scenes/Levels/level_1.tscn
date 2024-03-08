@@ -498,10 +498,10 @@ metadata/_edit_lock_ = true
 position = Vector2(48, 18)
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" parent="." index="5"]
+[node name="Camera2D" parent="." index="6"]
 position = Vector2(960, 548)
 
-[node name="Paths" parent="." index="6"]
+[node name="Paths" parent="." index="7"]
 metadata/_edit_lock_ = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="8"]
@@ -551,12 +551,15 @@ shape = SubResource("RectangleShape2D_w0ql1")
 
 [node name="GoblinSpawn" type="Timer" parent="Timers" index="0"]
 wait_time = 2.0
+one_shot = true
+autostart = true
 
 [node name="GoldTimer" type="Timer" parent="Timers" index="1"]
 autostart = true
 
 [connection signal="GoldIncreased" from="Buildings/GoldMine" to="." method="_on_gold_mine_gold_increased"]
-[connection signal="spawnKnight" from="UI" to="." method="_on_ui_spawn_knight"]
-[connection signal="spawnPawn" from="UI" to="." method="_on_ui_spawn_pawn"]
 [connection signal="timeout" from="Timers/GoblinSpawn" to="." method="_on_goblin_spawn_timeout"]
 [connection signal="timeout" from="Timers/GoldTimer" to="." method="_on_gold_timer_timeout"]
+[connection signal="spawnArcher" from="UI" to="." method="_on_ui_spawn_archer"]
+[connection signal="spawnKnight" from="UI" to="." method="_on_ui_spawn_knight"]
+[connection signal="spawnPawn" from="UI" to="." method="_on_ui_spawn_pawn"]

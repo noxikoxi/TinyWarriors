@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name NavigableEntity
 
+signal spawnSkull(position: Vector2)
+
 @export var speed:int
 var health:int
 var damage:int
@@ -22,13 +24,21 @@ func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
 	await get_tree().physics_frame
 	set_physics_process(true)
+	
+
+func isEnemyValid(): # Target always exists because of goblin house/castle
+	if not is_instance_valid(enemy): # Target was destroyed
+		get_next_target(null)
+		active = true
+		enemy_in_attack_area = false
 
 func _physics_process(_delta):
-	if active:
-		#if $NavigationAgent2D.is_navigation_finished():
-			#velocity = Vector2(0, 0)
-			#return
-				
+	isEnemyValid()
+	if not is_instance_valid(target_base):
+		active = false
+		enemy = null
+		
+	if active:		
 		var next_path_position: Vector2 = $NavigationAgent2D.get_next_path_position()
 		var direction: Vector2 = (next_path_position - global_position).normalized()
 		var angle = direction.angle()
@@ -40,7 +50,7 @@ func _physics_process(_delta):
 		velocity = direction * speed
 		$NavigationAgent2D.set_velocity(velocity)
 		move_and_slide()
-	elif enemy:
+	elif enemy: # Just attacking, not moving
 		var direction: Vector2 = (enemy.global_position - global_position).normalized()
 		var angle = direction.angle()
 		if angle > 3*PI/4 and angle < 5*PI/4:
@@ -58,7 +68,9 @@ func _ready():
 func hit(dmg):
 	health -= dmg
 	if health <= 0:
+		spawnSkull.emit(global_position)
 		queue_free()
+		
 		
 func _on_navigation_timer_timeout():
 	if active and enemy:

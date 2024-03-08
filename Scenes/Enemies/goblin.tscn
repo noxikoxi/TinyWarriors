@@ -1,7 +1,7 @@
 [gd_scene load_steps=37 format=3 uid="uid://vnn306icopyn"]
 
 [ext_resource type="PackedScene" uid="uid://cjmdtp4mv5wgy" path="res://Scenes/base_classes/navigable_entity.tscn" id="1_un7a5"]
-[ext_resource type="Script" path="res://Scenes/Enemies'/goblin.gd" id="2_4hpaa"]
+[ext_resource type="Script" path="res://Scenes/Enemies/goblin.gd" id="2_uv5qi"]
 [ext_resource type="Texture2D" uid="uid://dkduhdw862r6l" path="res://Assets/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_xrgga"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wy0qa"]
@@ -250,11 +250,8 @@ animations = [{
 
 [node name="GoblinTorch" groups=["Goblins"] instance=ExtResource("1_un7a5")]
 collision_layer = 2
-collision_mask = 15
-script = ExtResource("2_4hpaa")
-
-[node name="NavigationAgent2D" parent="." index="0"]
-path_postprocessing = 1
+collision_mask = 143
+script = ExtResource("2_uv5qi")
 
 [node name="AttackArea" type="Area2D" parent="." index="1"]
 collision_layer = 8

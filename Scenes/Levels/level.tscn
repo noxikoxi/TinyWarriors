@@ -14,6 +14,8 @@
 
 [node name="Units" type="Node2D" parent="."]
 
+[node name="Projectiles" type="Node2D" parent="."]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Paths" type="Node2D" parent="."]

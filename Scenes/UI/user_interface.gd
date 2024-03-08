@@ -4,6 +4,7 @@ extends CanvasLayer
 
 signal spawnKnight
 signal spawnPawn
+signal spawnArcher
 
 func _ready():
 	updateGoldText()
@@ -18,3 +19,6 @@ func _on_knight_button_pressed():
 
 func _on_pawn_button_pressed():
 	spawnPawn.emit()
+
+func _on_archer_button_pressed():
+	spawnArcher.emit()

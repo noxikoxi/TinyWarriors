@@ -1,0 +1,200 @@
+[gd_scene load_steps=28 format=3 uid="uid://cqthr585hwjcs"]
+
+[ext_resource type="PackedScene" uid="uid://cjmdtp4mv5wgy" path="res://Scenes/base_classes/navigable_entity.tscn" id="1_ttue7"]
+[ext_resource type="Script" path="res://Scenes/Enemies/goblin_dynamite.gd" id="2_p6duh"]
+[ext_resource type="Texture2D" uid="uid://c2df52qvyvrae" path="res://Assets/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_sx8gc"]
+[ext_resource type="Shader" path="res://Scenes/Enemies/goblin_dynamite.gdshader" id="3_p6tpc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g2h6r"]
+resource_local_to_scene = true
+shader = ExtResource("3_p6tpc")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbm3g"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8qvm"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_docv7"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr3dx"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dh00t"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8is5"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(960, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi13a"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(1152, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpm3g"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyoa4"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm2xd"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i37j3"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws41c"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfuw0"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftj4g"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y2js"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhn3a"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wwwc"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iowt"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpro8"]
+atlas = ExtResource("2_sx8gc")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4moki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbm3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8qvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_docv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yr3dx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dh00t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8is5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi13a")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpm3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyoa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm2xd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i37j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws41c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfuw0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftj4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y2js")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhn3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wwwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1iowt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpro8")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_blao4"]
+radius = 329.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nbkmv"]
+radius = 27.0
+
+[node name="DynamiteGoblin" groups=["Goblins"] instance=ExtResource("1_ttue7")]
+collision_layer = 2
+collision_mask = 255
+script = ExtResource("2_p6duh")
+
+[node name="AttackCooldown" type="Timer" parent="Timers" index="3"]
+wait_time = 2.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_g2h6r")
+position = Vector2(8, -4)
+sprite_frames = SubResource("SpriteFrames_4moki")
+animation = &"attack"
+
+[node name="AttackArea" type="Area2D" parent="." index="3"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+shape = SubResource("CircleShape2D_blao4")
+
+[node name="DynamiteSpawnPoint" type="Marker2D" parent="." index="4"]
+position = Vector2(50, -19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
+shape = SubResource("CircleShape2D_nbkmv")
+metadata/_edit_lock_ = true
+
+[connection signal="timeout" from="Timers/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

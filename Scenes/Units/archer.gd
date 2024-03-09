@@ -5,7 +5,6 @@ signal spawnArrow(position, direction)
 func _ready():
 	super._ready()
 	speed = 150
-	damage = 8
 	health = 18
 	notice_distance = 700
 	
@@ -18,7 +17,12 @@ func _ready():
 func attack():
 	$AnimatedSprite2D.play('attack_right')
 	$Timers/AttackCooldown.start()
-		
+
+func shader_on():
+	$AnimatedSprite2D.material.set_shader_parameter("progress", 0.8)
+	
+func shader_off():
+	$AnimatedSprite2D.material.set_shader_parameter("progress", 0)
 		
 	
 func _process(_delta):
@@ -34,9 +38,10 @@ func _process(_delta):
 			$AnimatedSprite2D.play("move")
 	
 func _on_animated_sprite_2d_animation_finished():
-	var direction = (enemy.global_position - $ArrowSpawnPoint.global_position).normalized()
-	spawnArrow.emit($ArrowSpawnPoint.global_position, direction)
-	$AnimatedSprite2D.play('idle')
+	if enemy != null:
+		var direction = (enemy.global_position - $ArrowSpawnPoint.global_position).normalized()
+		spawnArrow.emit($ArrowSpawnPoint.global_position, direction)
+		$AnimatedSprite2D.play('idle')
 	
 func _on_attack_cooldown_timeout():
 	can_attack = true

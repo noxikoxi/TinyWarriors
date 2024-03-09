@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://w8m8o7kkptnf"]
+[gd_scene load_steps=49 format=3 uid="uid://w8m8o7kkptnf"]
 
 [ext_resource type="PackedScene" uid="uid://dm2yqpv5b7ts6" path="res://Scenes/Levels/level.tscn" id="1_thr0l"]
 [ext_resource type="Texture2D" uid="uid://ch8rsslpjkbbw" path="res://Assets/Terrain/Ground/Tilemap_Flat.png" id="2_d2rtb"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bl36h7gbva464" path="res://Scenes/Buildings/goblin_house.tscn" id="27_5vh7h"]
 [ext_resource type="PackedScene" uid="uid://c2faffvjw3s05" path="res://Scenes/Buildings/gold_mine.tscn" id="28_o2st5"]
 [ext_resource type="PackedScene" uid="uid://boawd3ofk8bnl" path="res://Scenes/Enemies/barrel.tscn" id="31_wq1u4"]
+[ext_resource type="PackedScene" uid="uid://cjw37wm5iyhbd" path="res://Scenes/Enemies/dynamite.tscn" id="32_cjbbk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aryre"]
 texture = ExtResource("2_d2rtb")
@@ -509,6 +510,9 @@ metadata/_edit_lock_ = true
 
 [node name="Barrel" parent="Enemies" index="0" instance=ExtResource("31_wq1u4")]
 position = Vector2(1567, 877)
+
+[node name="Area2D" parent="Enemies" index="1" instance=ExtResource("32_cjbbk")]
+position = Vector2(300, 464)
 
 [node name="Units" parent="." index="4"]
 position = Vector2(48, 18)

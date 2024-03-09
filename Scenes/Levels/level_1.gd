@@ -5,9 +5,11 @@ var pawn_scene: PackedScene = preload("res://Scenes/Units/pawn.tscn")
 var archer_scene: PackedScene = preload("res://Scenes/Units/archer.tscn")
 
 var goblin_scene: PackedScene = preload("res://Scenes/Enemies/goblin.tscn")
+var goblin_dynamite_scene: PackedScene = preload("res://Scenes/Enemies/goblin_dynamite.tscn")
 
 var skull_scene: PackedScene = preload("res://Scenes/Objects/skull.tscn")
 var arrow_scene: PackedScene = preload("res://Scenes/Units/arrow.tscn")
+var dynamite_scene: PackedScene = preload("res://Scenes/Enemies/dynamite.tscn")
 
 func spawn_skull(position):
 	var skull = skull_scene.instantiate() as AnimatedSprite2D
@@ -21,10 +23,11 @@ func create_knight():
 	$Units.add_child(knight)
 	
 func create_pawn():
-	var pawn = pawn_scene.instantiate() as CharacterBody2D
-	pawn.position = $Buildings/Castle.getSpawnPosition()
-	pawn.connect("spawnSkull", spawn_skull)
-	$Units.add_child(pawn)
+	if $Buildings/GoldMine.capacity != $Buildings/GoldMine.max_capacity:
+		var pawn = pawn_scene.instantiate() as CharacterBody2D
+		pawn.position = $Buildings/Castle.getSpawnPosition()
+		pawn.connect("spawnSkull", spawn_skull)
+		$Units.add_child(pawn)
 	
 func create_archer():
 	var archer = archer_scene.instantiate() as CharacterBody2D
@@ -58,12 +61,28 @@ func _on_ui_spawn_pawn():
 		Globals.gold -= Globals.pawn_cost
 		$UI.updateGoldText()
 
-
-func _on_goblin_spawn_timeout():
+func spawn_goblin():
 	var goblin = goblin_scene.instantiate() as CharacterBody2D
 	goblin.position = $Buildings/GoblinHouse.getSpawnPosition()
 	goblin.connect("spawnSkull", spawn_skull)
 	$Enemies.add_child(goblin)
+	
+func spawn_goblin_dynamite():
+	var goblin = goblin_dynamite_scene.instantiate() as CharacterBody2D
+	goblin.position = $Buildings/GoblinHouse.getSpawnPosition()
+	goblin.connect("spawnSkull", spawn_skull)
+	goblin.connect("spawnDynamite", spawn_dynamite)
+	$Enemies.add_child(goblin)
+
+func _on_goblin_spawn_timeout():
+	spawn_goblin()
+	spawn_goblin_dynamite()
+	
+func spawn_dynamite(postion, direction):
+	var dynamite = dynamite_scene.instantiate() as Area2D
+	dynamite.position = postion
+	dynamite.direction = direction
+	$Projectiles.add_child(dynamite)
 
 
 func _on_gold_timer_timeout():

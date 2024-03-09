@@ -1,0 +1,145 @@
+[gd_scene load_steps=21 format=3 uid="uid://cjw37wm5iyhbd"]
+
+[ext_resource type="Texture2D" uid="uid://y22fb3hdhwq5" path="res://Assets/Factions/Goblins/Troops/TNT/Dynamite/Dynamite.png" id="1_1jxd6"]
+[ext_resource type="Script" path="res://Scenes/Enemies/dynamite.gd" id="1_bi86j"]
+[ext_resource type="Texture2D" uid="uid://djtsjrmuxkc6p" path="res://Assets/Effects/Explosion/Explosions.png" id="3_qjtro"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lr6hl"]
+radius = 3.581
+height = 36.684
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy2l0"]
+atlas = ExtResource("1_1jxd6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwre2"]
+atlas = ExtResource("1_1jxd6")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gwwo"]
+atlas = ExtResource("1_1jxd6")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8nry"]
+atlas = ExtResource("1_1jxd6")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg312"]
+atlas = ExtResource("1_1jxd6")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7e4rq"]
+atlas = ExtResource("1_1jxd6")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ct2r"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgm4h"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f4pn"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey8ac"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a2r5"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf3qf"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44jxb"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_km3p1"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsa1f"]
+atlas = ExtResource("3_qjtro")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ysh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oy2l0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwre2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gwwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8nry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7e4rq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ct2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgm4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f4pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey8ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a2r5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf3qf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44jxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km3p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsa1f")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
+}]
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 128
+collision_mask = 17
+script = ExtResource("1_bi86j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.471239
+shape = SubResource("CapsuleShape2D_lr6hl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_4ysh1")
+autoplay = "default"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

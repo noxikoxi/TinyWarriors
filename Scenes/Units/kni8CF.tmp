@@ -12,7 +12,6 @@ radius = 66.0076
 radius = 22.0907
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ymyi7"]
-resource_local_to_scene = true
 shader = ExtResource("3_8xrra")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/progress = 0.0
@@ -396,7 +395,7 @@ debug_enabled = true
 wait_time = 1.5
 one_shot = true
 
-[node name="ImmuneTimer2" type="Timer" parent="Timers" index="3"]
+[node name="ImmuneTimer" type="Timer" parent="Timers" index="3"]
 one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="." index="2"]

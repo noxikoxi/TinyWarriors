@@ -7,11 +7,17 @@ func _ready():
 	health = 20
 	target_base = Globals.castle
 	enemy_group = "Units"
-	enemy_buildings_group = "Buildings"
+	enemy_buildings_group = "PlayerBuildings"
 	enemy = target_base
 	$AnimatedSprite2D.play("move")
 	
+
+func shader_on():
+	$AnimatedSprite2D.material.set_shader_parameter("progress", 0.8)
 	
+func shader_off():
+	$AnimatedSprite2D.material.set_shader_parameter("progress", 0)
+
 func _process(_delta):
 	if active:
 		if $AttackArea.overlaps_body(enemy):

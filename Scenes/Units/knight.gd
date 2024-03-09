@@ -10,9 +10,17 @@ func _ready():
 	enemy_group = "Goblins"
 	enemy_buildings_group = "GoblinBuildings"
 	$AnimatedSprite2D.play("move")
+
+
+func shader_on():
+	$AnimatedSprite2D.material.set_shader_parameter("progress", 0.8)
 	
+func shader_off():
+	$AnimatedSprite2D.material.set_shader_parameter("progress", 0)
+
 func _process(_delta):
 	if active:
+		isEnemyValid()
 		if $AttackArea.overlaps_body(enemy):
 			active = false
 			enemy_in_attack_area = true

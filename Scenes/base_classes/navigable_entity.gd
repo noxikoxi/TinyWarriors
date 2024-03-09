@@ -7,6 +7,7 @@ signal spawnSkull(position: Vector2)
 @export var speed:int
 var health:int
 var damage:int
+var immune:bool = false
 
 var active:bool = true
 var can_attack:bool = true
@@ -19,6 +20,8 @@ var target_base:StaticBody2D
 var enemy_group:String
 var enemy_buildings_group:String
 var notice_distance:int = 400
+
+var navigation_calculated_buildings:bool = false
 
 func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
@@ -65,16 +68,32 @@ func _ready():
 	$NavigationAgent2D.path_desired_distance = 10.0
 	$NavigationAgent2D.target_desired_distance = 20.0
 	
+func shader_on():
+	pass
+	
+func shader_off():
+	pass
+	
 func hit(dmg):
-	health -= dmg
-	if health <= 0:
-		spawnSkull.emit(global_position)
-		queue_free()
+	if !immune:
+		health -= dmg
+		immune = true
+		$Timers/ImmuneTimer.start()
+		shader_on()
+		if health <= 0:
+			spawnSkull.emit(global_position)
+			queue_free()
 		
 		
 func _on_navigation_timer_timeout():
 	if active and enemy:
-		$NavigationAgent2D.target_position = enemy.global_position
+		if enemy in get_tree().get_nodes_in_group("Buildings"):
+			if not navigation_calculated_buildings:
+				$NavigationAgent2D.target_position = enemy.global_position * Vector2(randf_range(0.95, 1.05), 1)
+				navigation_calculated_buildings = true
+		else:
+			$NavigationAgent2D.target_position = enemy.global_position
+			navigation_calculated_buildings = false
 
 func get_next_target(actual_target):
 	var found_target:bool = false
@@ -96,3 +115,8 @@ func get_next_target(actual_target):
 func _on_change_target_timeout():
 	if can_change_enemy: # First so can change enemy from building to units
 		get_next_target(null)
+
+
+func _on_immune_timer_timeout():
+	immune = false
+	shader_off()

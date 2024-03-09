@@ -6,6 +6,7 @@
 script = ExtResource("1_dvbe3")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [node name="Timers" type="Node" parent="."]
 
@@ -17,5 +18,9 @@ autostart = true
 wait_time = 0.5
 autostart = true
 
+[node name="ImmuneTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [connection signal="timeout" from="Timers/NavigationTimer" to="." method="_on_navigation_timer_timeout"]
 [connection signal="timeout" from="Timers/ChangeTarget" to="." method="_on_change_target_timeout"]
+[connection signal="timeout" from="Timers/ImmuneTimer" to="." method="_on_immune_timer_timeout"]

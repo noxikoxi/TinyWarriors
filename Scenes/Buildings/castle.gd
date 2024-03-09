@@ -11,4 +11,4 @@ func _ready():
 	Globals.castle = self
 
 func getSpawnPosition():
-	return $SpawnPoint.global_position
+	return $SpawnPoints.get_children()[randi_range(0, 4)].global_position

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwn18"]
 size = Vector2(288, 166)
 
-[node name="Castle" type="StaticBody2D" groups=["Buildings"]]
+[node name="Castle" type="StaticBody2D" groups=["Buildings", "PlayerBuildings"]]
 collision_layer = 16
 collision_mask = 11
 script = ExtResource("1_fdhna")
@@ -19,5 +19,19 @@ shape = SubResource("RectangleShape2D_wwn18")
 position = Vector2(1, -87)
 texture = ExtResource("1_ccdxm")
 
-[node name="SpawnPoint" type="Marker2D" parent="."]
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnPoint" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1, 53)
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(44, 53)
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-47, 55)
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(89, 54)
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-96, 54)

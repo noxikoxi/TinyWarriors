@@ -1,8 +1,15 @@
-[gd_scene load_steps=59 format=3 uid="uid://dommkm7lu0evk"]
+[gd_scene load_steps=61 format=3 uid="uid://dommkm7lu0evk"]
 
 [ext_resource type="PackedScene" uid="uid://cjmdtp4mv5wgy" path="res://Scenes/base_classes/navigable_entity.tscn" id="1_vs5x1"]
 [ext_resource type="Texture2D" uid="uid://4ie84n25gc8e" path="res://Assets/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_l4f2n"]
 [ext_resource type="Script" path="res://Scenes/Units/archer.gd" id="2_xdjpe"]
+[ext_resource type="Shader" path="res://Scenes/Units/archer.gdshader" id="3_ibi7c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_78u6f"]
+resource_local_to_scene = true
+shader = ExtResource("3_ibi7c")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lpj1g"]
 atlas = ExtResource("2_l4f2n")
@@ -416,6 +423,7 @@ radius = 408.011
 script = ExtResource("2_xdjpe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_78u6f")
 position = Vector2(4, -8)
 sprite_frames = SubResource("SpriteFrames_gsyx5")
 animation = &"move"

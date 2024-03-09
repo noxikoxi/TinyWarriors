@@ -1,14 +1,21 @@
-[gd_scene load_steps=37 format=3 uid="uid://vnn306icopyn"]
+[gd_scene load_steps=39 format=3 uid="uid://vnn306icopyn"]
 
 [ext_resource type="PackedScene" uid="uid://cjmdtp4mv5wgy" path="res://Scenes/base_classes/navigable_entity.tscn" id="1_un7a5"]
 [ext_resource type="Script" path="res://Scenes/Enemies/goblin.gd" id="2_uv5qi"]
 [ext_resource type="Texture2D" uid="uid://dkduhdw862r6l" path="res://Assets/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_xrgga"]
+[ext_resource type="Shader" path="res://Scenes/Enemies/goblin.gdshader" id="3_si30j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wy0qa"]
 radius = 56.0089
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lgnvu"]
 radius = 26.1725
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emr83"]
+resource_local_to_scene = true
+shader = ExtResource("3_si30j")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0xdm"]
 atlas = ExtResource("2_xrgga")
@@ -250,7 +257,7 @@ animations = [{
 
 [node name="GoblinTorch" groups=["Goblins"] instance=ExtResource("1_un7a5")]
 collision_layer = 2
-collision_mask = 143
+collision_mask = 255
 script = ExtResource("2_uv5qi")
 
 [node name="AttackArea" type="Area2D" parent="." index="1"]
@@ -264,6 +271,7 @@ shape = SubResource("CircleShape2D_wy0qa")
 shape = SubResource("CircleShape2D_lgnvu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+material = SubResource("ShaderMaterial_emr83")
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_jmu6a")
 animation = &"idle"
